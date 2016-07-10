@@ -1,0 +1,55 @@
+{% extends 'spuds/base.html' %}
+{% block potatos_active %}active{% endblock %}
+
+{% block body %}
+    <div class="potatos-container container-fluid">
+
+        <div class="row">
+
+            {% for potato in all_potatos %}
+
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+
+                        <!-- Album logo -->
+                        <a href="{% url 'spuds:detail' potato.id %}">
+                            <img src="{{ potato.picture.url }}" class="img-responsive">
+                        </a>
+
+                        <div class="caption">
+                            <h2>{{ potato.name }}</h2>
+                            <h4>{{ potato.origin }}</h4>
+
+                            <!-- Details -->
+                            <a href="{% url 'spuds:detail' potato.id %}" class="btn btn-primary btn-sm">View Details:</a>
+
+                            <!-- Delete -->
+                            <form action="{% url 'spuds:potato-delete' potato.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="potato_id" value="{{ potato.id }}"/>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite -->
+                            <form action="{% url 'spuds:potato-update' potato.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="potato_id" value="{{ potato.id }}"/>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

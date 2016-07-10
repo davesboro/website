@@ -1,0 +1,64 @@
+{% extends 'spuds/base.html' %}
+{% block title %}Potato Details{% endblock %}
+{% block potatos_active %}active{% endblock %}
+
+{% block body %}
+    <div class="container-fluid facts-container">
+        <div class="row">
+
+            <!-- Left Album Info -->
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="{% url 'spuds:detail' potato.id %}">
+                            <img src="{{ potato.picture.url }}" class="img-responsive">
+                        </a>
+
+                        <h1>{{ potato.name }}
+                            <small>{{ potato.pronounced }}</small>
+                        </h1>
+                        <h2>{{ potato.origin }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Song Info -->
+            <div class="col-sm-8 col-md-9">
+
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                    <li class="active"><a href="{% url 'spuds:detail' potato.id %}">View All</a></li>
+                    <li><a href="#">Add New Fact</a></li>
+                </ul>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h3>All Facts</h3>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Origin</th>
+                                <th>Pronounced</th>
+                                <th>Favorite</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td>Fact list unavailable</td>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr>
+                                <td>{{ potato.name }}</td>
+                                <td>{{ potato.origin }}</td>
+                                <td>{{ potato.pronounced }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+
+
+
+{% endblock %}
